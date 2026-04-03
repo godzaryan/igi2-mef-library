@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "igi2mef"
-version = "0.1.1"
+version = "0.1.4"
 description = "A clean, performant parser for IGI 2: Covert Strike binary MEF models."
 readme = "README.md"
 requires-python = ">=3.8"
