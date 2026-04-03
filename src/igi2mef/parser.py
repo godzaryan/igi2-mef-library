@@ -113,7 +113,7 @@ def parse_mef(path, debug: Optional[MefDebugParams] = None) -> MefModel:
                 eff = b_id + debug.bone_id_bias
                 if 0 <= eff < len(m.bones):
                     bx, by, bz = m.bones[eff].world_offset
-                    dx += bx; dy += hy; dz += bz
+                    dx += bx; dy += by; dz += bz
             lv.append((dx, dy, dz)); ln.append(debug.swizzle(nx, ny, nz, 1.0)); lu.append((u, 1.0-v))
         lf = []
         for t in range(p_m["cnt"]):
@@ -176,8 +176,6 @@ def _parse_coll(data, m, debug):
     hsmc, _ = _read_chunk(data, b"HSMC")
     if not hsmc:
         return
-    nv0, nf0 = struct.unpack_from("<II", hsmc, 4, offset=0)[:2] # This is simplified, real HSMC is 32b
-    # Re-reading properly
     nf0, nv0, nm0, ns0 = struct.unpack_from("<IIII", hsmc, 0)
     nf1, nv1, nm1, ns1 = struct.unpack_from("<IIII", hsmc, 16)
     v_a, f_a, s_a = _read_all_chunks(data, b"XTVC"), _read_all_chunks(data, b"ECFC"), _read_all_chunks(data, b"HPSC")
